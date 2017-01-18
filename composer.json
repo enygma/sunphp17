@@ -1,6 +1,6 @@
 {
-    "name": "enygma/slim-app-skeleton",
-    "description": "A skeleton of a Slim application (with extras)",
+    "name": "enygma/sunphp17",
+    "description": "A skeleton of a Slim application (with extras) for SunshinePHP 2017",
     "keywords": ["slim", "framework", "skeleton", "slimframework"],
     "license": "MIT",
     "authors": [
