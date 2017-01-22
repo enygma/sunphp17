@@ -35,7 +35,12 @@ session_start();
 require_once BASE_PATH.'/vendor/twig/twig/lib/Twig/Autoloader.php';
 \Twig_Autoloader::register();
 
-$app = new Slim\App();
+$config = [
+    'settings' => [
+        'determineRouteBeforeAppMiddleware' => true
+    ]
+];
+$app = new Slim\App($config);
 
 // Autoload our controllers into the app container
 $container = $app->getContainer();
