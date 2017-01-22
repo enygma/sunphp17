@@ -1,6 +1,14 @@
 #!/bin/sh
 printf "\e[1;32m%-6s\e[m\n" "### Skeleton Setup"
 
+printf "\e[1;32m%-6s\e[m" "Have you set up your database yet? [y/N] "
+
+read hasdb
+if [ "$hasdb" == "" ] || [ "$hasdb" == "N" ] || [ "$hasdb" == "n" ]; then
+    printf "\e[1;31m%-6s\e[m\n" "You must craete your database first! (ex: mysqladmin create myapp)"
+    exit 1
+fi
+
 printf "Creating .env and phinx.yml files\n\n"
 cp .env.example .env
 cp phinx.yml.example phinx.yml
@@ -66,6 +74,14 @@ if [ $dbsetup == 'Y' ] || [ $dbsetup == 'y' ]; then
     sed -i.bak "s/development_pass/$dbpass/" phinx.yml
     sed -i.bak "s/development_user/$dbuser/" phinx.yml
     sed -i.bak "s/development_host/$dbhost/" phinx.yml
+
+    printf "\e[1;31m%-6s\e[m\n\n" "Verifying database connection..."
+    while ! mysql -u $dbuser -p$dbpass -h $dbhost $dbname -e ";" ; do
+        printf "\e[1;31m%-6s\e[m\n" "Cannot connect to database! Please verify your credentials and re-run setup"
+        exit 1
+   done
+   printf "\e[1;32m%-6s\e[m" "Database connection verified - moving on!"
+
 else
     printf "\e[1;31m%-6s\e[m\n\n" "Database configration left as default in .env and phynx.yml"
 fi
@@ -78,5 +94,11 @@ sed -i.bak "s/enckey/$key/" .env
 printf "Setting up tmp directory\n"
 mkdir tmp
 chmod -R 777 tmp
+
+printf "Running Migrations"
+vendor/bin/phinx migrate
+
+printf "Seeing data"
+vendor/bin/phinx seed:run
 
 printf "\e[1;32m%-6s\e[m\n\n" "--- Setup complete!"
