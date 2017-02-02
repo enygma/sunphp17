@@ -616,16 +616,16 @@
         },
         {
             "name": "psecio/validation",
-            "version": "0.5",
+            "version": "0.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/psecio/validation.git",
-                "reference": "706bf94aca435515f3b75611a858daad725c7011"
+                "reference": "2081416ea29a507403af7bdb23991bde997d0840"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/psecio/validation/zipball/706bf94aca435515f3b75611a858daad725c7011",
-                "reference": "706bf94aca435515f3b75611a858daad725c7011",
+                "url": "https://api.github.com/repos/psecio/validation/zipball/2081416ea29a507403af7bdb23991bde997d0840",
+                "reference": "2081416ea29a507403af7bdb23991bde997d0840",
                 "shasum": ""
             },
             "require-dev": {
@@ -652,7 +652,7 @@
                 "security",
                 "validation"
             ],
-            "time": "2016-12-20 12:50:07"
+            "time": "2017-02-02 05:10:10"
         },
         {
             "name": "psr/http-message",
