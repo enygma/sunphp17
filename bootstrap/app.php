@@ -69,8 +69,17 @@ $container['session'] = function($container) {
     return $session->getSegment('default');
 };
 
+// Register the message helper
+$container['message'] = function($container) {
+    return new \Lib\Messages();
+};
+
 // Set up the encryption "helper"
 $container['encryption'] = function($container) {
     $key = \Defuse\Crypto\Key::loadFromAsciiSafeString($_ENV['ENC_KEY']);
     return new \Lib\EncryptionManager($key);
+};
+
+$container['mail'] = function($container) {
+    return new \Lib\Mail();
 };
