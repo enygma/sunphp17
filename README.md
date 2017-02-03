@@ -40,3 +40,8 @@ The setup script will perform a few actions and ask a few questions. Be sure tha
 ```
 ./setup
 ```
+
+### Finished Product
+
+Once the setup has completed and the migrations have run you should have a database with two users: user1 and user2.
+These users will have the password "test123".
