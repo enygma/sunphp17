@@ -20,12 +20,17 @@
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                     <li><a href="/">Home</a></li>
+                    <li><a href="/user/login">Login</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
 
-        <div class="container" style="padding-top:50px">
+        <div class="container" style="padding-top:60px">
+        {% if user is defined %}
+            Logged in as {{ user.username }}<br/>
+        {% endif %}
+        {% include 'partial/_messages.php' %}
         <p>
         {% block content %}{% endblock %}
         </p>
