@@ -1,5 +1,6 @@
 #!/bin/sh
 printf "\e[1;32m%-6s\e[m\n" "### Skeleton Setup"
+cwd=$(pwd)
 
 printf "\e[1;32m%-6s\e[m" "Have you set up your database yet? [y/N] "
 
@@ -9,9 +10,18 @@ if [ "$hasdb" == "" ] || [ "$hasdb" == "N" ] || [ "$hasdb" == "n" ]; then
     exit 1
 fi
 
-printf "Creating .env and phinx.yml files\n\n"
-cp .env.example .env
-cp phinx.yml.example phinx.yml
+printf "Handling .env and phinx.yml files\n\n"
+
+ENVPATH="$cwd/.env"
+if [ ! -f $ENVPATH ]; then
+    printf "Making .env from default\n"
+    cp .env.example .env
+fi
+PHINXPATH="$cwd/phinx.yml"
+if [ ! -f $PHINXPATH ]; then
+    printf "Making phinx.yml from default\n"
+    cp phinx.yml.example phinx.yml
+fi
 
 default_appname="MyApp"
 
@@ -22,6 +32,12 @@ if [[ "$appname" == "" ]]; then
 fi
 sed -i.bak "s/$default_appname/$appname/" .env
 printf "\n"
+
+DIRECTORY="$cwd/vendor"
+if [ ! -d "$DIRECTORY" ]; then
+    printf "\e[1;32m%-6s\e[m" "Running required Composer install"
+    composer install
+fi
 
 printf "\e[1;32m%-6s\e[m" "Do you want to set up the database configuration? [Y/n] "
 
