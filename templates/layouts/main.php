@@ -20,7 +20,14 @@
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                     <li><a href="/">Home</a></li>
+
+                    {% if user is defined %}
+                    <li><a href="/user">Users</a></li>
+                    <li><a href="/user/logout">Logout</a></li>
+                    {% else %}
                     <li><a href="/user/login">Login</a></li>
+                    {% endif %}
+
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -28,7 +35,7 @@
 
         <div class="container" style="padding-top:60px">
         {% if user is defined %}
-            Logged in as {{ user.username }}<br/>
+            Logged in as <a href="/user/{{ user.id }}/view" style="font-weight:bold">{{ user.username }}</a>
         {% endif %}
         {% include 'partial/_messages.php' %}
         <p>
