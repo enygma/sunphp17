@@ -33,7 +33,7 @@ class UserController extends \App\Controller\BaseController
         $password = $this->request->getParam('password');
 
         // Find the user
-        $user = User::where(['username', '=', $username])->get();
+        $user = User::where(['username' => $username])->first();
         if ($user !== false && password_verify($password, $user->password) === true) {
             $this->session->set('user', $user);
             return $this->response->withRedirect('/');
@@ -42,6 +42,12 @@ class UserController extends \App\Controller\BaseController
         $this->message->error('Login failure');
 
         $this->render('/user/login.php', $data);
+    }
+
+    public function logout()
+    {
+        $this->session->set('user', null);
+        return $this->response->withRedirect('/');
     }
 
     public function reset()
