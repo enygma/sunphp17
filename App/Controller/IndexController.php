@@ -9,4 +9,9 @@ class IndexController extends \App\Controller\BaseController
         $data = [];
         return $this->render('/index/index.php', $data);
     }
+
+    public function error()
+    {
+        return $this->render('/index/error.php');
+    }
 }
