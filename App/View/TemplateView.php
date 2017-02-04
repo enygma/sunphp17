@@ -15,6 +15,7 @@ class TemplateView extends \Slim\Views\Twig
 
         // Add any messages
         $data['messages'] = $this['container']->message->get();
+        $this['container']->message->clear();
 
         parent::render($response, $template, $data);
     }
