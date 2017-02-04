@@ -8,7 +8,14 @@ class Messages
 
     public function __construct()
     {
-        $this->messages = [
+        if (!isset($_SESSION['messages'])) {
+            $this->init();
+        }
+    }
+
+    public function init()
+    {
+        $_SESSION['messages'] = [
             'error' => [],
             'success' => []
         ];
@@ -16,15 +23,20 @@ class Messages
 
     public function error($message)
     {
-        $this->messages['error'][] = $message;
+        $_SESSION['messages']['error'][] = $message;
     }
     public function success($message)
     {
-        $this->messages['success'][] = $message;
+        $_SESSION['messages']['success'][] = $message;
     }
 
     public function get($type = null)
     {
-        return ($type == null) ? $this->messages : $this->messages[$type];
+        return ($type == null) ? $_SESSION['messages'] : $_SESSION['messages'][$type];
+    }
+
+    public function clear()
+    {
+        $this->init();
     }
 }
