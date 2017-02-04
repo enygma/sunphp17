@@ -15,6 +15,13 @@ class UserAccess
     {
         $route = $request->getAttribute('route');
         $userId = $route->getArguments()['id'];
+        $user = $this->container->session->get('user');
+
+        // We can only see our own user record
+        if ($user->id !== (int)$userId) {
+            $this->container->message->error('Access Denied!');
+            return $response->withRedirect('/error');
+        }
 
         // Check the user access
         $response = $next($request, $response);
