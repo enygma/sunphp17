@@ -17,7 +17,8 @@
         "illuminate/database": "^5.3",
         "psecio/validation": "0.*",
         "robmorgan/phinx": "^0.6.5",
-        "defuse/php-encryption": "^2.0"
+        "defuse/php-encryption": "^2.0",
+        "doctrine/dbal": "^2.5"
     },
     "autoload": {
         "psr-4": {
